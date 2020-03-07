@@ -1,0 +1,51 @@
+<%- include("../res/head.ejs") %> 
+</head>
+<body>
+    <%- include("../res/nav.ejs") %> 
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5">
+                <h2>Signup</h2>
+                <form action="/auth/signup" method="POST">
+                <div class="form-group">
+                    <% 
+                    if(error!=""){
+                    %>
+                    <div class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Alert!</strong> <%=error%>
+                    </div>
+                    <%
+                    }
+                    %> 
+                    
+                </div>
+                <div class="form-group">
+                    <label for="fname">Full Name : </label>
+                    <input type="text" name="fname" id="fname" class="form-control" placeholder="Enter Full Name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address : </label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password : </label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Confirm Password : </label>
+                    <input type="password" class="form-control" id="cpwd" placeholder="Enter password" name="cpwd">
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="_csrf" value=<%=csrfToken%>>
+                    <p>Already have an account ? <a href="/auth/login">Login</a></p>
+                </div>
+                <button type="submit" class="btn btn-info">SIGNUP</button>
+                </form>
+            </div>
+            <div class="col-sm-7 landing-image">
+                <img src="/public/images/undraw_mobile_login_ikmv .svg" alt="">
+            </div>
+        </div>
+    </div>
+</body>

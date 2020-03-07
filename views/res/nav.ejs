@@ -1,0 +1,41 @@
+<nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="/">Expensify</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class=<%=path==='/' ? 'active' :''%>><a href="/">Home</a></li>
+          <li class=<%=path==='/about' ? 'active' :''%>><a href="/about">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <% 
+          if(loggedin) {
+              %>
+              <li class=<%=path==='/add' ? 'active' :''%>><a href="/profile/add"><span class="glyphicon glyphicon-plus"></span> Add Expense</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%=user.fname%> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                <li><a href="/profile/dashboard">Dashboard</a></li>
+                <li><a href="/profile/setting">Settings</a></li>
+                <li style="margin-top:5px;border-top:1px solid lightgrey"><a href="#"><form action="/logout" method="POST"><button class="btn btn-danger" style="width: 100%;margin-top:5px">Logout</button><input type="hidden" name="_csrf" value="<%=csrfToken%>"></form></a></li>
+                </ul>
+            </li>
+              <%
+          }else{
+              %>
+                <li class=<%=path==='/signup' ? 'active' :''%>><a href="/auth/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li class=<%=path==='/login' ? 'active' :''%>><a href="/auth/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              <%
+          }
+             %> 
+          
+        </ul>
+      </div>
+    </div>
+  </nav>

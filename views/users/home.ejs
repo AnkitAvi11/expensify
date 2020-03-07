@@ -1,0 +1,55 @@
+<%-include("../res/head.ejs")%>
+</head>
+<body>
+    <%-include("../res/nav.ejs")%>
+    <div class="container" >
+        <div class="row">
+        
+            <div class="col-sm-12">
+                <h4 style="margin-top: 40px;color:grey;font-weight: normal;">Last transactions</h4>
+                <div class="row">
+                    <% data.forEach(el => {
+                        %>
+                        <div class="col-sm-4 card" data-toggle="modal" data-target="#myModal">
+                            <div class="card-inside <%=el.amount > 0 ? 'success' : 'danger' %>">
+                                <h3><%=el.title%></h3>
+                                <h4>Rs. <%=Math.abs(el.amount)%></h4>
+                                <h5><%=el.description%></h5>
+                                <p><b><%=el.date.toDateString()%></b></p>
+                            </div>
+                        </div>
+                        <%
+                    }) %> 
+                </div>
+                <div class="">
+                    <h4><a href="/expenses/all">View All</a></h4>
+                </div>
+                <div>
+                    <br>
+                    <h4>Total money spent so far : <b>Rs. <%=Math.abs(total)%></b></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+            <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+
+    </div>
+    </div>
+</body>

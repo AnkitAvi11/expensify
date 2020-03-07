@@ -38,6 +38,8 @@ app.use(csrf());
 app.use(flash());
 
 //  getting all the routes of the application
+const indexRoute = require('./routes/home');
+const authRoute = require('./routes/auth');
 
 //  setting up the locals
 app.use((req, res, next) => {
@@ -51,10 +53,17 @@ app.use((req, res, next) => {
 });
 
 //  registering all the routes
+app.use(indexRoute);
+app.use('/auth',authRoute);
 
 //  this is for the not found error
 app.use((req, res, next) => {
-    res.send('Page not found');
+    res.render('404', {
+        title : 'Page not found',
+        css : [],
+        js : [],
+        path : '/'
+    });
 });
 
 //  this is for controlling the unintensional errors

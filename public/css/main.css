@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Muli' ;
+}
+html, body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+.navbar-brand {
+    font-weight: bolder;
+}
+.landing-image img {
+    width: 100%;
+}
+.card {
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    z-index: 100;
+    background-color: white;
+    overflow: hidden;
+}
+
+.card-inside {
+    border: 1px solid lightgrey;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.success {
+    border-left: 10px solid greenyellow;
+}
+.danger {
+    border-left: 10px solid red;
+}
