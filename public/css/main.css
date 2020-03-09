@@ -15,7 +15,6 @@ html, body {
 }
 .card {
     padding: 10px;
-    cursor: pointer;
     position: relative;
     z-index: 100;
     background-color: white;
@@ -26,6 +25,12 @@ html, body {
     border: 1px solid lightgrey;
     padding: 10px;
     border-radius: 5px;
+}
+
+body > div.container > div > div > div.row > div > div > h5 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .success {

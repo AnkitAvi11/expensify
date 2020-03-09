@@ -7,22 +7,37 @@
         
             <div class="col-sm-12">
                 <h4 style="margin-top: 40px;color:grey;font-weight: normal;">Last transactions</h4>
-                <div class="row">
-                    <% data.forEach(el => {
+                <div class="row" id="card-collect">
+                    <% 
+                    if(data.length > 0) {
                         %>
-                        <div class="col-sm-4 card" data-toggle="modal" data-target="#myModal">
-                            <div class="card-inside <%=el.amount > 0 ? 'success' : 'danger' %>">
+                        <% data.forEach(el => {
+                        %>
+                        <div class="col-sm-4 card" id="<%=el.e_id%>">
+                            <div class="card-inside <%=el.type==='credit' ? 'success' : 'danger' %>">
                                 <h3><%=el.title%></h3>
-                                <h4>Rs. <%=Math.abs(el.amount)%></h4>
+                                <h4>Rs. <%=el.amount%></h4>
                                 <h5><%=el.description%></h5>
-                                <p><b><%=el.date.toDateString()%></b></p>
+                                <p><b><%=el.exp_date.toDateString()%></b></p>
+                                <p style="text-align: right;"><button class="btn btn-light"
+                                    data-toggle="modal" data-target="#myModal"
+                                    id="<%=el.e_id%>" value="<%=csrfToken%>">View or Modify</button></p>
                             </div>
                         </div>
                         <%
                     }) %> 
+                        <%
+                    } else {
+                        %>
+                        <div class="col-sm-12">
+                            <h3 style="text-align: center;">No transactions today.</h3>
+                        </div>
+                        <%
+                    }   
+                    %> 
                 </div>
                 <div class="">
-                    <h4><a href="/expenses/all">View All</a></h4>
+                    <h4><a href="/profile/expense/all">View all transactions</a></h4>
                 </div>
                 <div>
                     <br>
@@ -43,9 +58,31 @@
             <h4 class="modal-title">Modal Header</h4>
         </div>
         <div class="modal-body">
-            <p>Some text in the modal.</p>
-        </div>
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="title">Expense Title : </label>
+                    <input type="text" name="title" id="title" placeholder="Title for the expense" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="desc">Description : </label>
+                    <textarea name="desc" id="desc" cols="30" rows="5" class="form-control" style="resize: none;" placeholder="A brief description about your expense."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Amount  : </label>
+                    <input type="number" name="amount" id="amount" class="form-control" placeholder="Amount spent in digits">
+                </div>
+                <div class="form-group">
+                    <label for="type">Expense Type : </label>
+                    <select name="type" id="type" class="form-control">
+                        <option value="credit">Credit</option>
+                        <option value="debit">Debit</option>
+                    </select>
+                </div>
+            
+            </div>
         <div class="modal-footer">
+            <button class="btn btn-success">SAVE</button>
+            <button class="btn btn-danger">DELETE</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
         </div>

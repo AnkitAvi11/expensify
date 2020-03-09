@@ -40,6 +40,7 @@ app.use(flash());
 //  getting all the routes of the application
 const indexRoute = require('./routes/home');
 const authRoute = require('./routes/auth');
+const profileRoute = require('./routes/profile');
 
 //  setting up the locals
 app.use((req, res, next) => {
@@ -47,14 +48,15 @@ app.use((req, res, next) => {
     res.locals.user = req.session.user;
     res.locals.csrfToken = req.csrfToken();
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "*");
-    res.setHeader("Access-Control-Allow-Headers", "Content-type:Authorization");
+    res.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, UPDATE, DELETE");
+    res.setHeader("Access-Control-Allow-Headers", "Content-type,Authorization");
     next();
 });
 
 //  registering all the routes
 app.use(indexRoute);
 app.use('/auth',authRoute);
+app.use('/profile', profileRoute);
 
 //  this is for the not found error
 app.use((req, res, next) => {
@@ -68,7 +70,7 @@ app.use((req, res, next) => {
 
 //  this is for controlling the unintensional errors
 app.use((err, req, res, next) => {
-    res.send(err);
+    res.send(err.message);
 });
 
 app.listen(PORT, () => {

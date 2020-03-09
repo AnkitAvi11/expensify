@@ -17,7 +17,9 @@ body('cpwd').custom((value, {req}) => {
 }).withMessage("Password didn't match."),
 authController.postSignup);
 
-router.post('/login', 
+router.post('/login',
+body('email').isEmail().withMessage("Enter a valid email address."),
+body('pwd').isLength({min:1}).withMessage("Enter the password"),
 authController.postLogin);
 
 module.exports = router;
