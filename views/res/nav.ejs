@@ -19,8 +19,9 @@
               %>
               <li class=<%=path==='/add' ? 'active' :''%>><a href="/profile/add"><span class="glyphicon glyphicon-plus"></span> Add Expense</a></li>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%=user.fname%> <span class="caret"></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%=user.fname.toUpperCase()%> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
+                <li><a href="/profile">Profile</a></li>
                 <li><a href="/profile/dashboard">Dashboard</a></li>
                 <li><a href="/profile/setting">Settings</a></li>
                 <li style="margin-top:5px;border-top:1px solid lightgrey"><a href="#"><form action="/logout" method="POST"><button class="btn btn-danger" style="width: 100%;margin-top:5px">Logout</button><input type="hidden" name="_csrf" value="<%=csrfToken%>"></form></a></li>

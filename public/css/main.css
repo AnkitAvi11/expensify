@@ -22,9 +22,14 @@ html, body {
 }
 
 .card-inside {
-    border: 1px solid lightgrey;
     padding: 10px;
-    border-radius: 5px;
+    box-shadow: 0px 0px 5px lightgrey;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+}
+
+.card-inside:hover {
+    transform: translateY(-10px);
 }
 
 body > div.container > div > div > div.row > div > div > h5 {
@@ -34,8 +39,8 @@ body > div.container > div > div > div.row > div > div > h5 {
 }
 
 .success {
-    border-left: 10px solid greenyellow;
+    border-left: 10px solid lightgreen;
 }
 .danger {
-    border-left: 10px solid red;
+    border-left: 10px solid rgba(255, 49, 83, 0.884);
 }

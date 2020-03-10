@@ -1,4 +1,5 @@
 <%-include("../res/head.ejs")%>
+
 </head>
 <body>
     <%-include("../res/nav.ejs")%>
@@ -6,7 +7,7 @@
         <div class="row">
         
             <div class="col-sm-12">
-                <h4 style="margin-top: 40px;color:grey;font-weight: normal;">Last transactions</h4>
+                <h3 style="margin-top: 20px;color:black;font-weight: normal;">Last few transactions <span style="color: grey;">( Total money spent so far : <b>Rs. <%=Math.abs(total)%> )</b></span></h3>
                 <div class="row" id="card-collect">
                     <% 
                     if(data.length > 0) {
@@ -41,9 +42,20 @@
                 </div>
                 <div>
                     <br>
-                    <h4>Total money spent so far : <b>Rs. <%=Math.abs(total)%></b></h4>
+                    
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Pie Chart depicting the user stats -->
+    <div class="container">
+        <div class="row" style="margin-bottom: 50px;">
+            <div class="col-sm-12" style="margin-bottom: 20px;">
+                <h3>Visualization of the expenses and income</h3>
+            </div>
+            <div class="col-sm-4"><canvas id="myChart" width="400" height="400"></canvas></div>
+            <div class="col-sm-8"><canvas id="barGraph" width="350" height="200"></canvas></div>
         </div>
     </div>
 
@@ -89,4 +101,7 @@
 
     </div>
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
 </body>

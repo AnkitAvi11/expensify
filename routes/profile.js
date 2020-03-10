@@ -13,6 +13,10 @@ body('amount').isNumeric().withMessage("Enter a valid amount"),
 body('date').isLength({min:8}).withMessage("Enter a valid date"),
 profileController.postAddExpense);
 
-router.post("/expense", profileController.getExpense);
+router.post("/expense", auth.isAuth, profileController.getExpense);
+
+router.get("/getdoughnat", auth.isAuth, profileController.getdoughnat);
+
+router.get("/gethomebargraph", auth.isAuth, profileController.homeBarGraph);
 
 module.exports = router;

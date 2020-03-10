@@ -60,7 +60,7 @@ app.use('/profile', profileRoute);
 
 //  this is for the not found error
 app.use((req, res, next) => {
-    res.render('404', {
+    res.status(404).render('404', {
         title : 'Page not found',
         css : [],
         js : [],

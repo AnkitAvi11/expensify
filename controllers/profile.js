@@ -43,7 +43,9 @@ module.exports.postAddExpense = (req, res, next) => {
     }
 }
 
-//  API
+//  APIS 
+
+//  for getting expense
 module.exports.getExpense = (req, res, next) => {
     if(req.session.loggedin) {
         ExpenseModel.getById(req.session.user.user_id, req.body.id)
@@ -51,8 +53,43 @@ module.exports.getExpense = (req, res, next) => {
             res.send(result);
         }).catch(err => {
             res.send(err);
-        })
+        });
     }else{
         res.send({error:500, msg : "You need to be fucking logged in." });
     }
 };
+
+//  for getting doughnat
+module.exports.getdoughnat = async (req, res, next) => {
+    if(req.session.loggedin) {
+        let expenses = await ExpenseModel.getTotalExpenses(req.session.user.user_id);
+        let income = await ExpenseModel.getTotalIncome(req.session.user.user_id);
+        return res.send({expense : [expenses[0][0].total, income[0][0].total]})
+    }
+    return res.send(JSON.stringify({error_code : 505, msg : "You are not loggedin, you dumbass!"}))
+}
+
+
+//  for getting home bar graph
+module.exports.homeBarGraph = (req, res, next) => {
+    let date = new Date();
+    let lastdate = new Date();
+    lastdate.setDate(date.getDate()-7+1);
+    current_date = date.toLocaleDateString();
+    last_date = lastdate.toLocaleDateString();
+
+    ExpenseModel.getWeeklyTransaction(req.session.user.user_id,current_date, last_date)
+    .then(([result, fields]) => {
+        result = result.map(el => {
+            return {
+                date:el.date.toLocaleDateString(),
+                day : el.date.toDateString().split(" ")[0],
+                amount:el.total,
+            }
+        });
+        res.send({date:date.getDate(), lastdate:lastdate.getDate(), result});
+    }).catch(err => {
+        res.send(err);
+    });
+
+}
